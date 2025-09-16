@@ -65,14 +65,6 @@ sudo certbot --nginx -d yourdomain.com
 
 ---
 
-## Verification
-
-* Visit `http://yourdomain.com` → should redirect to HTTPS.
-* Static files served from `/static/` and `/static2/`.
-* Application proxied to backend services on ports **8001** and **8002**.
-
----
-
 ## Notes
 
 * Always test with `sudo nginx -t` before restarting.
