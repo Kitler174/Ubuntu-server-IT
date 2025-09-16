@@ -68,6 +68,7 @@ sudo certbot --nginx -d yourdomain.com
 ## Notes
 
 * Always test with `sudo nginx -t` before restarting.
+* Reload using `sudo systemctl reload nginx`.
 * Keep configs version-controlled in this repository.
 * Update SSL certificates periodically with Certbot.
 
