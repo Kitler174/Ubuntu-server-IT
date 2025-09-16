@@ -1,0 +1,43 @@
+# /etc/nginx/sites-available/filename
+
+# Redirect all HTTP to HTTPS, remove if not needed or you don't have SSL
+server { 
+    listen 80; # Listen on port 80 for HTTP
+    server_name DOMAIN; # Your domain name
+    return 301 https://$host$request_uri; # Redirect all HTTP requests to HTTPS
+}
+
+# HTTPS server configuration
+server {
+    listen 443 ssl; # Listen on port 443 for SSL, switch to 8080 if you don't have SSL and delete the ssl lines below 
+    ssl_certificate /etc/letsencrypt/live/DOMAIN/fullchain.pem; # Your SSL certificate path
+    ssl_certificate_key /etc/letsencrypt/live/DOMAIN/privkey.pem; # Your SSL certificate key path
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    server_name DOMAIN; # Your domain name
+
+    # Static files path
+    location /static/ {
+        alias /var/www/static/; # Your static files path
+        expires max; # Cache static files for maximum time, use "expires 30d;" for 30 days etc
+        access_log off; # Disable access log for static files
+        #add_header Cache-Control "public, immutable"; # Optional: further caching
+
+    }
+    location /static2/ {
+        alias /var/www/static2/; 
+        expires max;
+        access_log off;
+        #add_header Cache-Control "public, immutable";
+
+    }
+
+    # Deny access to hidden files
+    location ~ /\. {
+        deny all; # Deny access to hidden files
+    }
+
+}
+
+# make sure to use chmod -R 755 /var/www/static to give nginx access to the files
