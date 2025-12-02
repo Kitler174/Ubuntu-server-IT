@@ -1,0 +1,17 @@
+# create in /etc/systemd/autostart.service
+
+[Unit]
+Description=Description
+After=network.target
+
+[Service]
+Type=simple
+#sudo chmod +x /root/start.sh
+ExecStart=/root/start.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+#sudo systemctl daemon-reload
+#sudo systemctl enable autostart.service
