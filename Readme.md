@@ -26,7 +26,11 @@ This repository contains scripts used for server automation: volume backups, Doc
 
 ```bash
 sudo /path/to/start.sh 
+```
+
 or
+
+```bash
 sudo systemctl start autostart.service
 ```
 
